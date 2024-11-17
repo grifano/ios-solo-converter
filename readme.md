@@ -15,21 +15,20 @@ from tech to the best cycling routes.
 
 Happy exploring!
 
-# Project: Lord Of The Ring - Currency Converter App
+# Project: Solo Currency Converter App
 
 ![](./public/github-showcase.webp)
 
 ### Overview
 
-A simple, user-friendly app designed to convert Lord of the Rings-inspired currencies. Users can enter an amount in the left field and instantly view the converted value in the right field. Choose from six Middle-earth currencies by tapping on an icon in the currency selection screen. The app also includes an information screen displaying current exchange rates for all denominations. Built with Swift, this app provides a fun, interactive experience for fans and fantasy lovers alike.
+A simple, user-friendly app designed to convert currency based on user local currency.
 
 Your users should be able to:
 
 - Enter an amount in one field to convert it to another currency.
-- Select from six currencies by tapping on an icon.
-- View exchange rates for all currencies on the info screen.
+- Select currency from list of countries.
 - Save preferred currencies for future use.
-- Switch between left and right currency fields for conversions.
+- Switch between "from" and "to" currencies for conversions.
 
 ### Tech Stack:
 

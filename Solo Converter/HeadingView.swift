@@ -17,7 +17,8 @@ struct HeadingView: View {
             )
             .font(.body)
         }
-        .padding(.horizontal, 10)
+        .padding(.horizontal, 20)
+        .foregroundStyle(.white)
         .multilineTextAlignment(.center)
     }
 }

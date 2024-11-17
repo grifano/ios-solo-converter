@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CurrencyActionView: View {
-    
+
     @Binding var fromCurrency: Currency
-    @Binding var amount: Double
-    
+    @Binding var amount: String
+
     var body: some View {
         HStack {
             Menu {
@@ -23,7 +23,7 @@ struct CurrencyActionView: View {
                             Image(currency.image)
                             Text(currency.name)
                         }
-                        
+
                     }
                 }
             } label: {
@@ -32,22 +32,25 @@ struct CurrencyActionView: View {
                         .foregroundColor(.cyan)
                     Text(fromCurrency.name)  // Display the selected currency name
                         .font(.headline)
+                        .lineLimit(1)  // Ensure text is on one line
+                        .minimumScaleFactor(0.7)  // Scale down if needed
+                        .fixedSize(horizontal: true, vertical: false)  // Prevent text from being cut off
+                        .layoutPriority(1)  // Give higher priority to prevent truncation
                     Image(systemName: "chevron.down")
                 }
-                .padding()
-                .background(Color.cyan.opacity(0.1))
+                .padding(10)
+                .background(Color.cyan.opacity(0.2))
                 .cornerRadius(10)
             }
             Spacer()
-            Text("50.00") // let amount: String
+            Text(amount)  // let amount: String
                 .font(.title)
                 .foregroundStyle(.cyan)
         }
     }
 }
 
-
-#Preview {
-    CurrencyActionView(fromCurrency: .constant(.eur), amount: .constant(50.00))
-}
-
+//#Preview {
+//    CurrencyActionView(
+//        fromCurrency: .constant(.eur), amount: .constant("50.00"))
+//}

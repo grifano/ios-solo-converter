@@ -1,76 +1,63 @@
-//
-//  ContentView.swift
-//  Solo Converter
-//
-//  Created by Serhii Orlenko on 13/11/2024.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-
-    @State var amount: Double = 50
-    @State var fromCurrency: Currency = .eur
-    @State var toCurrency: Currency = .pln
-    @State var result: Double = 1
+    @State private var amount: String = "0"
+    @State private var fromCurrency: Currency = .eur
+    @State private var toCurrency: Currency = .pln
+    @State private var result: Double = 0.0
 
     var body: some View {
         ZStack {
-            Color.cyan
-                .ignoresSafeArea()
+            Color.cyan.ignoresSafeArea()
+            
             VStack(spacing: 24) {
                 // Heading
                 HeadingView()
-                    .foregroundStyle(.white)
 
-                // Converter
+                
+                // Converter Section
                 VStack(spacing: 20) {
-                    // From currency
+                    // From Currency
                     CurrencyActionHeaderView(rate: 4.24, label: "Amount")
                     CurrencyActionView(fromCurrency: $fromCurrency, amount: $amount)
-
-                    // Devider & Reverse button
+                    
+                    // Divider & Reverse button
                     ZStack {
                         Divider()
                             .background(.cyan)
                             .frame(height: 4)
                             .cornerRadius(4)
-
+                        
                         Button {
-
+                            // Optional: Add reverse functionality here
                         } label: {
-                            Image(
-                                systemName:
-                                    "arrow.trianglehead.2.clockwise.rotate.90"
-                            )
-                            .font(.title2)
+                            Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
+                                .font(.title2)
                         }
                         .frame(width: 50, height: 50)
                         .background(.cyan)
                         .foregroundStyle(.white)
                         .cornerRadius(50)
                     }
-
-                    // To currency convertion result
-                    CurrencyActionHeaderView(rate: 4.24, label: "Converted Amount")
-                    CurrencyActionView(fromCurrency: $toCurrency, amount: $result)
                     
-
+                    // To Currency (Fixed to PLN for now)
+                    CurrencyActionHeaderView(rate: fromCurrency.rawValue, label: "Converted Amount")
+                    CurrencyActionView(fromCurrency: $toCurrency, amount: .constant(String(format: "%.2f", convertedAmount)))
                 }
-                .frame(maxWidth: .infinity)
                 .padding(20)
                 .background(.white)
                 .cornerRadius(20)
-
-                // Numeric keyboard
+                
+                // Numeric Keyboard
+                CustomKeyboardView(amount: $amount)
             }
             .padding(.horizontal, 20)
         }
     }
+    
+    // Conversion logic
+    private var convertedAmount: Double {
+        let inputAmount = Double(amount) ?? 0
+        return inputAmount * fromCurrency.rawValue
+    }
 }
-
-#Preview {
-    ContentView()
-}
-
-
